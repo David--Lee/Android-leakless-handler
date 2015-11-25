@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new DemoTask(this)).start();
     }
 
+    //
     private static class MyHandler extends Handler {
         private final WeakReference<MainActivity> activityReference;
 
