@@ -11,6 +11,10 @@ import android.widget.TextView;
 import java.lang.ref.WeakReference;
 
 /**
+ *  非静态内部类会隐式的持有外部类的引用，
+ *  这时如果内部类的生命周期大于外部类（Activity）的生命周期
+ *  就可能会发生内存泄露
+ *
  * @author lyw
  * @date 2015-11-25
  */
@@ -51,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                     final MainActivity activity = activityReference
                             .get();
                     if (activity != null && !activity.isFinishing()) {// 判断该页面是否还在， 在的话更新UI
-                        activity.textView.setText("......");
+                        activity.textView.setText("...data...");
                     }
                     break;
 
