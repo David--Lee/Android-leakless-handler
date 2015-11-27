@@ -1,5 +1,6 @@
 package cn.david.leaklesshandler;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 case MSG_OK:
                     final MainActivity activity = activityReference
                             .get();
-                    if (activity != null && !activity.isFinishing()) {// 判断该页面是否还在， 在的话更新UI
+                    if (isActivityAlive(activity)) {// 判断该页面是否还在， 在的话更新UI
                         activity.textView.setText("...data...");
                     }
                     break;
@@ -89,9 +90,27 @@ public class MainActivity extends AppCompatActivity {
 
 
             final MainActivity activity = activityReference.get();
-            if ( activity != null && !activity.isFinishing()) { // 判断该页面是否还在， 在的话发送消息
+            if ( isActivityAlive(activity)) { // 判断该页面是否还在， 在的话发送消息
                 activity.mHandler.obtainMessage(MSG_OK).sendToTarget();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        // 在Activity摧毁时清空 handler 里面的消息
+        if (mHandler != null) {
+            mHandler.removeCallbacksAndMessages(null);
+        }
+        super.onDestroy();
+    }
+
+    /**
+     *  判断该页面是否还在
+     * @param activity
+     * @return
+     */
+    public static boolean isActivityAlive(Activity activity) {
+        return activity != null && !activity.isFinishing();
     }
 }
