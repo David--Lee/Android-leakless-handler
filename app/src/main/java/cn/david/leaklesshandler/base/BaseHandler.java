@@ -9,6 +9,9 @@ import java.lang.ref.WeakReference;
 import cn.david.leaklesshandler.MainActivity;
 
 /**
+ * 持有 Activity 弱引用的 handler,
+ * 建议写成静态类
+ *
  * Created by David on 2015/11/30.
  */
 public class BaseHandler<T extends BaseActivity> extends Handler {
