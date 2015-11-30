@@ -1,7 +1,10 @@
 package cn.david.leaklesshandler.base;
 
+import android.support.v7.app.AppCompatActivity;
+
 /**
- * Created by Administrator on 2015/11/30.
+ * Created by David on 2015/11/30.
  */
-public class BaseActivity {
+public class BaseActivity extends AppCompatActivity{
+
 }
